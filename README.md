@@ -1,4 +1,4 @@
-# Blockchain Property Registry System (FastAPI + PostgreSQL)
+# Blockchain Property Registry System (FastAPI + SQLAlchemy)
 
 A near-production-ready MVP backend for secure property registration and transfer, backed by a custom blockchain ledger with Proof-of-Authority (PoA) simulation.
 
@@ -12,7 +12,7 @@ A near-production-ready MVP backend for secure property registration and transfe
 - Custom block + transaction model with hash-linked immutability
 - Chain integrity validation and tamper detection
 - Simplified PoA consensus with authorized validators and quorum
-- SQLAlchemy ORM + PostgreSQL persistence
+- SQLAlchemy ORM persistence (PostgreSQL for local/prod, SQLite fallback on Vercel)
 
 ## Project Structure
 
@@ -30,7 +30,7 @@ A near-production-ready MVP backend for secure property registration and transfe
 ## Prerequisites
 
 - Python 3.11+
-- PostgreSQL 14+
+- PostgreSQL 14+ (for local dev with Postgres)
 
 ## Setup
 
@@ -272,13 +272,22 @@ Push this repo/branch to GitHub.
 
 ### 3) Configure environment variables in Vercel
 
-Set (at minimum):
+Set these for production:
 
 - `DATABASE_URL` (managed Postgres URL, e.g. Neon/Supabase/RDS)
 - `ADMIN_TOKEN`
 - `AUTHORIZED_NODES`
 - `POA_QUORUM`
+
+- If `DATABASE_URL` is not set on Vercel, the app now auto-falls back to:
+
+- `sqlite:////tmp/property_registry.db`
+
+This prevents startup crashes (`FUNCTION_INVOCATION_FAILED`) and is useful for quick demos.
+For real deployments, use managed Postgres because `/tmp` storage is ephemeral.
+
 - `STORAGE_PATH=/tmp/storage`
+
 
 > Important: Vercel file storage is ephemeral. Use `/tmp` only for temporary files.  
 > For production media durability, replace local disk storage with S3/MinIO.
