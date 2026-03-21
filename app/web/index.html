@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Registry Console</title>
+    <link rel="stylesheet" href="/web/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Blockchain Property Registry</h1>
+      <p>Admin + Operator Console</p>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>1) Register User</h2>
+        <form id="register-user-form">
+          <label>Name <input required name="name" /></label>
+          <button type="submit">Register User</button>
+        </form>
+        <pre id="register-user-output"></pre>
+      </section>
+
+      <section class="card">
+        <h2>2) Register Property (Admin)</h2>
+        <form id="register-property-form">
+          <label>Admin Token <input required name="adminToken" /></label>
+          <label>Property ID <input required name="propertyId" /></label>
+          <label>Owner Public Key <textarea required name="ownerPublicKey"></textarea></label>
+          <label>Location <input required name="location" /></label>
+          <label>Description <textarea required name="description"></textarea></label>
+          <label>Media File <input required type="file" name="media" /></label>
+          <button type="submit">Register Property</button>
+        </form>
+        <pre id="register-property-output"></pre>
+      </section>
+
+      <section class="card">
+        <h2>3) Transfer Property (Signed)</h2>
+        <form id="transfer-form">
+          <label>Property ID <input required name="propertyId" /></label>
+          <label>Current Owner Public Key <textarea required name="fromPublicKey"></textarea></label>
+          <label>Current Owner Private Key <textarea required name="privateKey"></textarea></label>
+          <label>Recipient Public Key <textarea required name="toPublicKey"></textarea></label>
+          <label>Document Text <textarea required name="documentText"></textarea></label>
+          <label>Current Media Hash <input required name="mediaHash" /></label>
+          <button type="submit">Sign + Transfer</button>
+        </form>
+        <pre id="transfer-output"></pre>
+      </section>
+
+      <section class="card">
+        <h2>4) Property Lookup</h2>
+        <form id="property-form">
+          <label>Property ID <input required name="propertyId" /></label>
+          <button type="submit">Get Property</button>
+        </form>
+        <pre id="property-output"></pre>
+      </section>
+
+      <section class="card">
+        <h2>5) Property History</h2>
+        <form id="history-form">
+          <label>Property ID <input required name="propertyId" /></label>
+          <button type="submit">Get History</button>
+        </form>
+        <pre id="history-output"></pre>
+      </section>
+
+      <section class="card">
+        <h2>6) Blockchain</h2>
+        <button id="blockchain-btn">Refresh Chain</button>
+        <pre id="blockchain-output"></pre>
+      </section>
+    </main>
+
+    <script type="module" src="/web/app.js"></script>
+  </body>
+</html>
